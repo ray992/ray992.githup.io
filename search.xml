@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/09/17/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>深入理解volatile关键字</title>
+    <url>/2020/10/08/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3volatile%E5%85%B3%E9%94%AE%E5%AD%97/</url>
+    <content><![CDATA[<h3 id="机器硬件CPU"><a href="#机器硬件CPU" class="headerlink" title="机器硬件CPU"></a>机器硬件CPU</h3><p>所有的运算操作都是交由CPU寄存器来完成的，操作指令需要数据的读取和写入，而所有数据来源是计算机的主存，但是内存的访问速度远远不及CPU的运算速度。由于两边严重不对等，传统的FSB直连内存的访问方式会严重影响整体的吞吐量，所以增加了缓存设计。现在的缓存增加到了3级， 最靠近CPU的缓存为L1，然后依次为L2， L3，和主内存。<br>L1 cache 又分为 l1d和l1i, 这两种有各自专门的用途。CPU cache有多个Cache Line构成， 大小为64字节， 也是最小的缓存单位。</p>
+<h4 id="CPU缓存一致性问题"><a href="#CPU缓存一致性问题" class="headerlink" title="CPU缓存一致性问题"></a>CPU缓存一致性问题</h4><p>每个线程都有自己的工作内存， 变量在多个线程的本地内存中都存在自己的副本。如果两个线程同时对变量执行操作如i++，然后再经过计算写入主内存， 很有可能经过两次操作，结果还是1。</p>
+<p>1 通过总线加锁的方式</p>
+<p>每次只有一个CPU能够访问变量的内存，效率低下。</p>
+<p>2 通过缓存一致性协议(如Intel的MESI协议)</p>
+<p>读取操作，不做任何处理， 只是将Cache中的数据读取到寄存器当中。写入操作， 发出信号通知其他CPU将该变量的Cache line设置为无效状态， 然后在变量进行读取的时候到主存中再次获取。</p>
+<h3 id="java内存模型"><a href="#java内存模型" class="headerlink" title="java内存模型"></a>java内存模型</h3><h4 id="线程和内存的抽象关系"><a href="#线程和内存的抽象关系" class="headerlink" title="线程和内存的抽象关系"></a>线程和内存的抽象关系</h4><ol>
+<li><p>共享变量存储于主内存之中， 每个线程都可以访问。</p>
+</li>
+<li><p>每个线程都有私有的工作内存或者本地内存。</p>
+</li>
+<li><p>工作内存只是存储对共享变量的副本。</p>
+</li>
+<li><p>线程不能直接操作主内存， 只有先操作了工作内存之后才能写入到主内存。</p>
+</li>
+</ol>
+<h4 id="原子性，-可见性，-有序性"><a href="#原子性，-可见性，-有序性" class="headerlink" title="原子性， 可见性， 有序性"></a>原子性， 可见性， 有序性</h4><ol>
+<li>java内存模型只保证了读取和赋值的原子性操作， 其他都不保证。如果要使某些代码片段具备原子性， 需要使用synchronzied, 或者JUC中lock， volatile无法保证原子性</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VolatileDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> CountDownLatch latch = <span class="keyword">new</span> CountDownLatch(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">inc</span><span class="params">()</span></span>&#123;</span><br><span class="line">        t++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i ++)&#123;</span><br><span class="line">            <span class="keyword">new</span> Thread()&#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; <span class="number">10000</span>; j ++)&#123;</span><br><span class="line">                        inc();</span><br><span class="line">                    &#125;</span><br><span class="line">                    latch.countDown();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;.start();</span><br><span class="line">        &#125;</span><br><span class="line">        latch.await();</span><br><span class="line">        System.out.println(t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>volatile， synchronized， 和显示锁Lock均能保证可见性。</p>
+</li>
+<li><p>单线程的情况下， 重排序并不会引起什么问题。在多线程的情况下， 会影响到程序的正确执行， 同样通过volatile， synchronized， 和显示锁Lock保证有序性。</p>
+</li>
+</ol>
+<p><em>java内存模型通过Happens-before原则就可以保证有序性</em></p>
+<h3 id="volatile的原理和实现机制"><a href="#volatile的原理和实现机制" class="headerlink" title="volatile的原理和实现机制"></a>volatile的原理和实现机制</h3><p>unsafe.cpp源码中，被volatile修饰的变量存在于一个 “lock;” 的前缀， 相当于一个内存屏障。</p>
+<ol>
+<li><p>该屏障保证指令重排序不会被后面的代码排到内存屏障之前。</p>
+</li>
+<li><p>该屏障保证指令重排序不会被前面的代码排到内存屏障之后。</p>
+</li>
+<li><p>该屏障确保屏障之前的指令前面的代码全部执行完成。</p>
+</li>
+<li><p>强制将线程工作内存中的值修改刷新到主内存当中。</p>
+</li>
+<li><p>如果是写操作， 则会导致其他线程工作内存中缓存数据失效。</p>
+</li>
+</ol>
+<h3 id="volatile的使用场景"><a href="#volatile的使用场景" class="headerlink" title="volatile的使用场景"></a>volatile的使用场景</h3><ol>
+<li><p>开关控制利用可见效， 常见的就是线程的关闭操作。</p>
+</li>
+<li><p>状态标记利用有序性。</p>
+</li>
+<li><p>单例模式的double-check利用有序性</p>
+</li>
+</ol>
+<h3 id="volatile和synchronized的区别"><a href="#volatile和synchronized的区别" class="headerlink" title="volatile和synchronized的区别"></a>volatile和synchronized的区别</h3><ol>
+<li><p>volatile只能修饰实例变量和类变量， 不能修饰方法和方法参数，及局部变量，常量。</p>
+</li>
+<li><p>synchronized 不能修饰变量，只能修饰方法和代码块。</p>
+</li>
+<li><p>volatile修饰的变量可以为null， 但是synchronzied的monitor对象不能为null。</p>
+</li>
+<li><p>volatile无法保证原子性， 但是synchronized是一种排他机制， 因此能够保证原子性。</p>
+</li>
+<li><p>两种都可以保证共享资源在多线程间可见，但是实现机制不同。 synchronized借助JVM指令的monitor enter和monitor exit对通过排他对方式使得代码串行化， 在monitor exit时对共享资源都会刷新都主内存当中。而volatile使用机器指令”lock;” 的方式迫使其他线程工作内存的数据失效，不得到主内存进行再次加载。</p>
+</li>
+<li><p>volatile禁止JVM编译器以及处理器对其进行重排序， 所以能够保证有序性。synchronized以程序的串行化执行来交换的。</p>
+</li>
+<li><p>volatile不会使线程陷入阻塞， synchronized会使线程陷入阻塞。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>内存</tag>
+        <tag>并发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>死锁分析和诊断</title>
+    <url>/2020/10/07/%E6%AD%BB%E9%94%81%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<h3 id="程序死锁"><a href="#程序死锁" class="headerlink" title="程序死锁"></a>程序死锁</h3><ul>
+<li><p>交叉锁导致程序出现死锁，互相等待对方释放锁</p>
+</li>
+<li><p>内存不足</p>
+</li>
+<li><p>一问一答的数据交换</p>
+</li>
+<li><p>数据库锁</p>
+<p>某个线程执行for update语句退出了事务， 其他线程访问数据库时都将陷入死锁</p>
+</li>
+<li><p>文件锁</p>
+</li>
+<li><p>死循环引起的死锁</p>
+<p>程序不工作， CPU占有率居高不下， 一般为系统假死。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>锁</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Synchronized关键字总结</title>
+    <url>/2020/10/07/Synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h3 id="什么是synchronized"><a href="#什么是synchronized" class="headerlink" title="什么是synchronized"></a>什么是synchronized</h3><p>synchronized 关键字可以实现一个简单的策略来防止线程干扰和内存一致性错误，如果一个对象对多个线程是可见的，那么对对象对所有读和写都将通过同步对方式来进行。</p>
+<p>提供了一种锁对机制，能够确保共享变量对互斥访问，从而防止数据不一致的问题</p>
+<p>包括monitor enter和monitor exit两个JVM指令， 能够保证在任何时候任何线程执行到monitor enter成功前都必须从主存中获取数据，而不是从缓存中， 在monitor exit运行成功后，共享变量被更新后的值必须刷入到主内存当中</p>
+<p>严格遵守happens-before规则， 一个monitor exit指令之前必须要有一个monitor enter指令</p>
+<h3 id="synchronized-的使用"><a href="#synchronized-的使用" class="headerlink" title="synchronized 的使用"></a>synchronized 的使用</h3><p>1 同步方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sync</span><span class="params">()</span></span>&#123;</span><br><span class="line">   System.out.println(<span class="string">&quot;synchronized method&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2 同步代码块</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mutex</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object MUTEX = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">access</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (MUTEX)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                TimeUnit.MINUTES.sleep(<span class="number">10</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Mutex mutex = <span class="keyword">new</span> Mutex();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(mutex::access).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="线程堆栈分析"><a href="#线程堆栈分析" class="headerlink" title="线程堆栈分析"></a>线程堆栈分析</h3><p>使用Jconsole工具连接，监控JVM线程</p>
+<p>使用jstack命令打印进程的线程堆栈信息</p>
+<h3 id="synchronized-的底层原理"><a href="#synchronized-的底层原理" class="headerlink" title="synchronized 的底层原理"></a>synchronized 的底层原理</h3><p>使用javap命令对java类进行反汇编， 输出大量JVM命令，在这些命令中，你会发现monitor enter和monitor exit是成对出现的。</p>
+<ol>
+<li><p>monitor enter</p>
+<p>每一个对象都与一个monitor关联， 一个monitor的锁只能被一个线程在同一时间获得。所以如果monitor的计数器为0，则意味着monitor的lock还没有被获得，某个线程获得之后会立即对该计数器加一，这个时候该线程就是该monitor的所有者。如果一个已经拥有该monitor的所有权的线程重如，则会导致计数器再次累加。如果monitor已经被其他线程所拥有， 则其他线程尝试获取该monitor的所有权，会被陷入阻塞状态直到monitor计数器变为0，才能再次尝试获取对monitor对所有权。</p>
+</li>
+<li><p>monitor exit</p>
+<p>释放对monitor对所有权， 将计数器减一。</p>
+</li>
+<li><p>this monitor</p>
+<p>如果一个类中多个方法都被syncronized修饰，争抢的是同一个monitor的lock。</p>
+</li>
+<li><p>class monitor</p>
+<p>如果一个类多个静态方法都被syncronized修饰，同样也是争抢的同一个monitor的lock。</p>
+</li>
+</ol>
+<h3 id="需要注意的问题"><a href="#需要注意的问题" class="headerlink" title="需要注意的问题"></a>需要注意的问题</h3><p>1 与monitor关联的对象不能为null</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Object mutex = <span class="keyword">null</span>;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">synchronized</span> (mutex)&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2 作用域太大， 其效率越低</p>
+<p>3 不同的monitor企图锁相同的方法</p>
+<p>4 多个锁交叉导致死锁</p>
+]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
+        <tag>锁</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HashSet 分析</title>
+    <url>/2020/09/24/HashSet/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>集合</category>
+      </categories>
+      <tags>
+        <tag>Set</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HashMap分析</title>
+    <url>/2020/09/24/HashMap/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>集合</category>
+      </categories>
+      <tags>
+        <tag>Map</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vetctor使用和分析</title>
+    <url>/2020/09/23/Vector%E4%BD%BF%E7%94%A8%E5%92%8C%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>集合</category>
+      </categories>
+      <tags>
+        <tag>List</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LinkedList 使用和分析</title>
+    <url>/2020/09/23/LinkedList%E4%BD%BF%E7%94%A8%E5%92%8C%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>集合</category>
+      </categories>
+      <tags>
+        <tag>List</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ArrayList使用和分析</title>
+    <url>/2020/09/21/ArrayList%E4%BD%BF%E7%94%A8%E5%92%8C%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>集合</category>
+      </categories>
+      <tags>
+        <tag>List</tag>
+      </tags>
+  </entry>
+</search>
