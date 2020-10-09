@@ -149,7 +149,33 @@
         </div>
 
         <div class="article-content markdown-body">
-            
+            <h3 id="ArrayList的框架"><a href="#ArrayList的框架" class="headerlink" title="ArrayList的框架"></a>ArrayList的框架</h3><ul>
+<li><p>继承AbstractList抽象类（ AbstractList -&gt; AbstractCollection -&gt; Collection）</p>
+</li>
+<li><p>实现List接口 （List -&gt; Collection -&gt; Iterable）</p>
+</li>
+<li><p>实现RandomAccess接口（随机访问，通过元素的序号获取元素）</p>
+</li>
+<li><p>实现Cloneable接口（能被复制克隆）</p>
+</li>
+<li><p>实现java.io.Serializable接口（可以序列化传输）</p>
+</li>
+</ul>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>ArrayList 相当于一个动态数组，容量动态增长。初识容量0，第一次扩容的大小为10，每次扩容后的大小是之前的1.5倍。在实际的操作中，它不是线程安全的容器，因此在多线程中应该选择Vector或者CopyOnWriteArrayList。</p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认构造函数</span></span><br><span class="line">ArrayList()</span><br><span class="line"></span><br><span class="line"><span class="comment">// capacity是ArrayList的默认容量大小。当由于增加数据导致容量不足时，容量会添加上一次容量大小的一半。</span></span><br><span class="line">ArrayList(<span class="keyword">int</span> capacity)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个包含collection的ArrayList</span></span><br><span class="line">ArrayList(Collection&lt;? extends E&gt; collection)</span><br></pre></td></tr></table></figure>
+
+<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><ol>
+<li><p>迭代器</p>
+</li>
+<li><p>索引</p>
+</li>
+<li><p>for循环</p>
+</li>
+</ol>
+<p>** 效率由高到低 **  索引 》 for循环 = 迭代器</p>
+<h3 id="toArray"><a href="#toArray" class="headerlink" title="toArray"></a>toArray</h3><p><strong>Java不支持向下转型</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; stringList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">stringList.add(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">stringList.add(<span class="string">&quot;b&quot;</span>);</span><br><span class="line">stringList.add(<span class="string">&quot;c&quot;</span>);</span><br><span class="line">stringList.add(<span class="string">&quot;d&quot;</span>);</span><br><span class="line">String[] array = stringList.toArray(<span class="keyword">new</span> String[<span class="number">0</span>]);</span><br><span class="line">String[] array2= <span class="keyword">new</span> String[stringList.size()];</span><br><span class="line">stringList.toArray(array2);</span><br><span class="line">System.out.println(array.length);</span><br><span class="line">System.out.println(array2.length);</span><br></pre></td></tr></table></figure>
+
         </div>
 
         <div class="article-nav">
@@ -278,7 +304,7 @@
         
             <div class="post-toc-wrap">
     <div class="post-toc">
-        
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList%E7%9A%84%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">ArrayList的框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86"><span class="nav-number">4.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#toArray"><span class="nav-number">5.</span> <span class="nav-text">toArray</span></a></li></ol>
     </div>
 </div>
         
