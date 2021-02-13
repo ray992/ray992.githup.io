@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     
     <title>
-        动态代理 | Yeqiang&#39;s Blog
+        动态代理 | 叶强的博客
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/css/style.css">
 
     <script id="hexo-configurations">
-    let CONFIG = {"hostname":"example.com","root":"/","localsearch":{"enable":true,"trigger":"auto","unescape":false,"preload":true},"themeInfo":{"name":"ILS","version":"2.0.2","author":"XPoet","repository":"https://github.com/XPoet/hexo-theme-ils"},"path":"search.xml"};
+    let CONFIG = {"hostname":"example.com","root":"/","localsearch":{"enable":true,"trigger":"auto","unescape":true,"preload":true},"themeInfo":{"name":"ILS","version":"2.0.2","author":"XPoet","repository":"https://github.com/XPoet/hexo-theme-ils"},"path":"search.xml"};
   </script>
 <meta name="generator" content="Hexo 5.2.0"></head>
 
@@ -36,7 +36,7 @@
     <div class="header-content">
 
         <a class="logo-title" href="/">
-            Yeqiang&#39;s Blog
+            叶强的博客
         </a>
 
         <ul class="menu-list">
@@ -45,7 +45,7 @@
                     <a class=""
                        href="/"
                     >
-                        HOME
+                        首页
                     </a>
                 </li>
             
@@ -53,7 +53,23 @@
                     <a class=""
                        href="/archives"
                     >
-                        ARCHIVES
+                        归档
+                    </a>
+                </li>
+            
+                <li class="menu-item">
+                    <a class=""
+                       href="/categories"
+                    >
+                        分类
+                    </a>
+                </li>
+            
+                <li class="menu-item">
+                    <a class=""
+                       href="/tags"
+                    >
+                        标签
                     </a>
                 </li>
             
@@ -61,7 +77,7 @@
                     <a class=""
                        href="/about"
                     >
-                        ABOUT
+                        关于
                     </a>
                 </li>
             
@@ -77,17 +93,27 @@
             
                 <li class="drawer-menu-item">
                     <a class=""
-                       href="/">HOME</a>
+                       href="/">首页</a>
                 </li>
             
                 <li class="drawer-menu-item">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives">归档</a>
                 </li>
             
                 <li class="drawer-menu-item">
                     <a class=""
-                       href="/about">ABOUT</a>
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item">
+                    <a class=""
+                       href="/about">关于</a>
                 </li>
             
         </ul>
@@ -187,13 +213,22 @@
 
         <div class="article-nav">
             
+                <div class="article-prev">
+                    <a class="prev btn"
+                       rel="prev"
+                       href="/2020/10/15/mysql%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"
+                    >
+                        <i class="fa fa-chevron-left"></i> <span class="post-nav-title-item">mysql事务</span><span class="post-nav-item">上一篇</span>
+                    </a>
+                </div>
+            
             
                 <div class="article-next">
                     <a class="next btn"
                        rel="next"
                        href="/2020/10/08/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3volatile%E5%85%B3%E9%94%AE%E5%AD%97/"
                     >
-                        <span class="post-nav-title-item">深入理解volatile关键字</span><span class="post-nav-item">Next posts</span> <i class="fa fa-chevron-right"></i>
+                        <span class="post-nav-title-item">深入理解volatile关键字</span><span class="post-nav-item">下一篇</span> <i class="fa fa-chevron-right"></i>
                     </a>
                 </div>
             
@@ -215,7 +250,7 @@
                 avatar: 'wavatar',
                 enableQQ: true,
                 placeholder: '',
-                lang: 'en'.toLowerCase()
+                lang: 'zh-CN'.toLowerCase()
             });
 
 
@@ -255,11 +290,11 @@
                 <footer class="footer">
     <div class="info-container">
         <div class="copyright-info info-item">
-            &copy; 2020 <i class="fa fa-heart-o"></i> <a href="/">XPoet</a>
+            &copy; 2021 <i class="fa fa-heart-o"></i> <a href="/">XPoet</a>
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动 | 主题 <a
                     href="https://github.com/XPoet/hexo-theme-ils" target="_blank">ILS v2.0.2</a>
         </div>
     </div>
@@ -322,7 +357,7 @@
                 <input autocomplete="off"
                        autocorrect="off"
                        autocapitalize="off"
-                       placeholder="Search..."
+                       placeholder="搜索..."
                        spellcheck="false"
                        type="search"
                        class="search-input"

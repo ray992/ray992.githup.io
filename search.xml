@@ -25,6 +25,34 @@
       </tags>
   </entry>
   <entry>
+    <title></title>
+    <url>/2021/02/12/markdown%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>java8新特性</title>
+    <url>/2020/10/22/java8%E6%96%B0%E7%89%B9%E6%80%A7/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>语法特性</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql事务</title>
+    <url>/2020/10/15/mysql%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+        <tag>事务</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>动态代理</title>
     <url>/2020/10/09/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</url>
     <content><![CDATA[<h3 id="JDK动态代理"><a href="#JDK动态代理" class="headerlink" title="JDK动态代理"></a>JDK动态代理</h3><p>spring aop 默认使用的是JDK动态代理。如果一个类实现了一个接口，则spring则会用这种方式进行代理。<br>首先是实现InvocationHandler接口， 重写invoke方法， 这个方法就是代理的方法。其次是Proxy类，通过这个类的newProxyInstance方法， 返回一个代理对象。生成的代理对象实现原来那个类的所有接口， 并对接口的方法进行代理 ， 通过代理对象调用这些方法，底层通过反射实现， 调用我们实现的invoke方法。</p>
