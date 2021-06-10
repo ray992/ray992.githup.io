@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>叶强的博客</title>
+  
+  
+  <link href="https://yq05.cn/atom.xml" rel="self"/>
+  
+  <link href="https://yq05.cn/"/>
+  <updated>2021-05-16T08:35:04.564Z</updated>
+  <id>https://yq05.cn/</id>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>动态代理</title>
+    <link href="https://yq05.cn/2020/10/09/dong-tai-dai-li/"/>
+    <id>https://yq05.cn/2020/10/09/dong-tai-dai-li/</id>
+    <published>2020-10-09T15:32:40.463Z</published>
+    <updated>2021-05-16T08:35:04.564Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;JDK动态代理&quot;&gt;&lt;a href=&quot;#JDK动态代理&quot; class=&quot;headerlink&quot; title=&quot;JDK动态代理&quot;&gt;&lt;/a&gt;JDK动态代理&lt;/h3&gt;&lt;p&gt;spring aop</summary>
+        
+      
+    
+    
+    
+    <category term="Java" scheme="https://yq05.cn/categories/Java/"/>
+    
+    
+    <category term="代理模式" scheme="https://yq05.cn/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"/>
+    
+    <category term="spring" scheme="https://yq05.cn/tags/spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深入理解volatile关键字</title>
+    <link href="https://yq05.cn/2020/10/08/shen-ru-li-jie-volatile-guan-jian-zi/"/>
+    <id>https://yq05.cn/2020/10/08/shen-ru-li-jie-volatile-guan-jian-zi/</id>
+    <published>2020-10-08T09:09:48.179Z</published>
+    <updated>2021-05-16T08:35:11.594Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;机器硬件CPU&quot;&gt;&lt;a href=&quot;#机器硬件CPU&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java" scheme="https://yq05.cn/categories/Java/"/>
+    
+    <category term="并发编程" scheme="https://yq05.cn/categories/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="内存" scheme="https://yq05.cn/tags/%E5%86%85%E5%AD%98/"/>
+    
+    <category term="并发" scheme="https://yq05.cn/tags/%E5%B9%B6%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Synchronized关键字总结</title>
+    <link href="https://yq05.cn/2020/10/07/synchronized-guan-jian-zi-zong-jie/"/>
+    <id>https://yq05.cn/2020/10/07/synchronized-guan-jian-zi-zong-jie/</id>
+    <published>2020-10-07T15:42:51.763Z</published>
+    <updated>2021-05-16T08:35:39.304Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;什么是synchronized&quot;&gt;&lt;a href=&quot;#什么是synchronized&quot; class=&quot;headerlink&quot; title=&quot;什么是synchronized&quot;&gt;&lt;/a&gt;什么是synchronized&lt;/h3&gt;&lt;p&gt;synchronized</summary>
+        
+      
+    
+    
+    
+    <category term="Java" scheme="https://yq05.cn/categories/Java/"/>
+    
+    <category term="并发编程" scheme="https://yq05.cn/categories/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="JVM" scheme="https://yq05.cn/tags/JVM/"/>
+    
+    <category term="锁" scheme="https://yq05.cn/tags/%E9%94%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ArrayList使用和分析</title>
+    <link href="https://yq05.cn/2020/09/21/arraylist-shi-yong-he-fen-xi/"/>
+    <id>https://yq05.cn/2020/09/21/arraylist-shi-yong-he-fen-xi/</id>
+    <published>2020-09-21T15:32:54.636Z</published>
+    <updated>2021-05-16T08:35:33.152Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;ArrayList的框架&quot;&gt;&lt;a href=&quot;#ArrayList的框架&quot; class=&quot;headerlink&quot; title=&quot;ArrayList的框架&quot;&gt;&lt;/a&gt;ArrayList的框架&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;继承AbstractList抽象类（</summary>
+        
+      
+    
+    
+    
+    <category term="Java" scheme="https://yq05.cn/categories/Java/"/>
+    
+    <category term="集合" scheme="https://yq05.cn/categories/Java/%E9%9B%86%E5%90%88/"/>
+    
+    
+    <category term="List" scheme="https://yq05.cn/tags/List/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,60 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2020/09/17/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2021/02/12/markdown%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>java8新特性</title>
-    <url>/2020/10/22/java8%E6%96%B0%E7%89%B9%E6%80%A7/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>语法特性</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql事务</title>
-    <url>/2020/10/15/mysql%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-        <tag>事务</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>动态代理</title>
-    <url>/2020/10/09/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</url>
+    <url>/2020/10/09/dong-tai-dai-li/</url>
     <content><![CDATA[<h3 id="JDK动态代理"><a href="#JDK动态代理" class="headerlink" title="JDK动态代理"></a>JDK动态代理</h3><p>spring aop 默认使用的是JDK动态代理。如果一个类实现了一个接口，则spring则会用这种方式进行代理。<br>首先是实现InvocationHandler接口， 重写invoke方法， 这个方法就是代理的方法。其次是Proxy类，通过这个类的newProxyInstance方法， 返回一个代理对象。生成的代理对象实现原来那个类的所有接口， 并对接口的方法进行代理 ， 通过代理对象调用这些方法，底层通过反射实现， 调用我们实现的invoke方法。</p>
 <h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><p>原生， 不需要任何依赖。</p>
 <p>通过反射机制生成的代理类的速度比CGLib操作字节码生成的代理类的速度更快。</p>
@@ -69,24 +17,95 @@
 <p>无法对final方法， private方法进行代理。</p>
 <p>通过字节码生成代理类，其速度要低于JDK通过反射生成代理类的速度。</p>
 <h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>定义接口：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Star</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sing</span><span class="params">(String name)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dance</span><span class="params">(String name)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class=" language-Java"><code class="language-Java">public interface Star &#123;
 
+    void sing(String name);
+
+    void dance(String name);
+&#125;
+</code></pre>
 <p>接口实现类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Ll</span> <span class="keyword">implements</span> <span class="title">Star</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;info&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sing</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot; &quot;</span>+ <span class="string">&quot;sing&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dance</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        System.out.println(name + <span class="string">&quot; &quot;</span>+ <span class="string">&quot;dance&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class=" language-Java"><code class="language-Java">public class Ll implements Star &#123;
 
+    public final void info()&#123;
+        System.out.println("info");
+    &#125;
+
+    @Override
+    public void sing(String name) &#123;
+        System.out.println(name + " "+ "sing");
+    &#125;
+
+    @Override
+    public void dance(String name) &#123;
+        System.out.println(name + " "+ "dance");
+    &#125;
+&#125;</code></pre>
 <p>JDK动态代理：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StarProxy</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//目标类</span></span><br><span class="line">    <span class="keyword">private</span> Object object;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setObject</span><span class="params">(Object object)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.object = object;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;earn money&quot;</span>); <span class="comment">//增强</span></span><br><span class="line">        method.invoke(object, args);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//生成代理类</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">createProxyObject</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(object.getClass().getClassLoader(), object.getClass().getInterfaces(), <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class=" language-Java"><code class="language-Java">public class StarProxy implements InvocationHandler &#123;
 
+    //目标类
+    private Object object;
+
+    public void setObject(Object object) &#123;
+        this.object = object;
+    &#125;
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;
+        System.out.println("earn money"); //增强
+        method.invoke(object, args);
+        return null;
+    &#125;
+
+    //生成代理类
+    public Object createProxyObject()&#123;
+        return Proxy.newProxyInstance(object.getClass().getClassLoader(), object.getClass().getInterfaces(), this);
+    &#125;
+&#125;</code></pre>
 <p>cglib动态代理：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CglibProxy</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//产生一个代理类</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">createProxyObject</span><span class="params">(Class&lt;?&gt; clazz)</span></span>&#123;</span><br><span class="line">        Enhancer enhancer = <span class="keyword">new</span> Enhancer();</span><br><span class="line">        enhancer.setSuperclass(clazz);</span><br><span class="line">        enhancer.setCallback(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">return</span> enhancer.create();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object o, Method method, Object[] objects, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;earn money&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> methodProxy.invokeSuper(o, objects);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class=" language-Java"><code class="language-Java">public class CglibProxy implements MethodInterceptor &#123;
 
+    //产生一个代理类
+    public Object createProxyObject(Class<?> clazz)&#123;
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(clazz);
+        enhancer.setCallback(this);
+        return enhancer.create();
+    &#125;
+
+    @Override
+    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable &#123;
+        System.out.println("earn money");
+        return methodProxy.invokeSuper(o, objects);
+    &#125;
+&#125;</code></pre>
 <p>测试：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdkProxyDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Star star = <span class="keyword">new</span> Ll();</span><br><span class="line">        StarProxy starProxy = <span class="keyword">new</span> StarProxy();</span><br><span class="line">        starProxy.setObject(star);</span><br><span class="line">        Object proxyObject = starProxy.createProxyObject();</span><br><span class="line">        Star proxyStar = (Star)proxyObject;</span><br><span class="line">        proxyStar.dance(<span class="string">&quot;aa&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//代理类不能直接包含被代理的对象， 而是一个InvocationHandler, InvocationHandler包含被代理的对象， 并负责分发请求给代理对象， 分发前后都可以做增强</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class=" language-Java"><code class="language-Java">public class JdkProxyDemo &#123;
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CglibDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        CglibProxy cglibProxy = <span class="keyword">new</span> CglibProxy();</span><br><span class="line">        Ll star = (Ll) cglibProxy.createProxyObject(Ll.class);</span><br><span class="line">        star.sing(<span class="string">&quot;bb&quot;</span>);</span><br><span class="line">        star.dance(<span class="string">&quot;cc&quot;</span>);</span><br><span class="line">        star.info();<span class="comment">//因为info是final ，所以无法被代理</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    public static void main(String[] args) &#123;
+        Star star = new Ll();
+        StarProxy starProxy = new StarProxy();
+        starProxy.setObject(star);
+        Object proxyObject = starProxy.createProxyObject();
+        Star proxyStar = (Star)proxyObject;
+        proxyStar.dance("aa");
+    &#125;
+    //代理类不能直接包含被代理的对象， 而是一个InvocationHandler, InvocationHandler包含被代理的对象， 并负责分发请求给代理对象， 分发前后都可以做增强
+&#125;</code></pre>
+<pre class=" language-Java"><code class="language-Java">public class CglibDemo &#123;
+
+    public static void main(String[] args) &#123;
+        CglibProxy cglibProxy = new CglibProxy();
+        Ll star = (Ll) cglibProxy.createProxyObject(Ll.class);
+        star.sing("bb");
+        star.dance("cc");
+        star.info();//因为info是final ，所以无法被代理
+    &#125;
+&#125;</code></pre>
 ]]></content>
       <categories>
-        <category>设计模式</category>
+        <category>Java</category>
       </categories>
       <tags>
         <tag>代理模式</tag>
@@ -95,7 +114,7 @@
   </entry>
   <entry>
     <title>深入理解volatile关键字</title>
-    <url>/2020/10/08/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3volatile%E5%85%B3%E9%94%AE%E5%AD%97/</url>
+    <url>/2020/10/08/shen-ru-li-jie-volatile-guan-jian-zi/</url>
     <content><![CDATA[<h3 id="机器硬件CPU"><a href="#机器硬件CPU" class="headerlink" title="机器硬件CPU"></a>机器硬件CPU</h3><p>所有的运算操作都是交由CPU寄存器来完成的，操作指令需要数据的读取和写入，而所有数据来源是计算机的主存，但是内存的访问速度远远不及CPU的运算速度。由于两边严重不对等，传统的FSB直连内存的访问方式会严重影响整体的吞吐量，所以增加了缓存设计。现在的缓存增加到了3级， 最靠近CPU的缓存为L1，然后依次为L2， L3，和主内存。<br>L1 cache 又分为 l1d和l1i, 这两种有各自专门的用途。CPU cache有多个Cache Line构成， 大小为64字节， 也是最小的缓存单位。</p>
 <h4 id="CPU缓存一致性问题"><a href="#CPU缓存一致性问题" class="headerlink" title="CPU缓存一致性问题"></a>CPU缓存一致性问题</h4><p>每个线程都有自己的工作内存， 变量在多个线程的本地内存中都存在自己的副本。如果两个线程同时对变量执行操作如i++，然后再经过计算写入主内存， 很有可能经过两次操作，结果还是1。</p>
 <p>1 通过总线加锁的方式</p>
@@ -115,8 +134,33 @@
 <h4 id="原子性，-可见性，-有序性"><a href="#原子性，-可见性，-有序性" class="headerlink" title="原子性， 可见性， 有序性"></a>原子性， 可见性， 有序性</h4><ol>
 <li>java内存模型只保证了读取和赋值的原子性操作， 其他都不保证。如果要使某些代码片段具备原子性， 需要使用synchronzied, 或者JUC中lock， volatile无法保证原子性</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VolatileDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> CountDownLatch latch = <span class="keyword">new</span> CountDownLatch(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">inc</span><span class="params">()</span></span>&#123;</span><br><span class="line">        t++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i ++)&#123;</span><br><span class="line">            <span class="keyword">new</span> Thread()&#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; <span class="number">10000</span>; j ++)&#123;</span><br><span class="line">                        inc();</span><br><span class="line">                    &#125;</span><br><span class="line">                    latch.countDown();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;.start();</span><br><span class="line">        &#125;</span><br><span class="line">        latch.await();</span><br><span class="line">        System.out.println(t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">VolatileDemo</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
 
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">volatile</span> <span class="token keyword">int</span> t <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> CountDownLatch latch <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CountDownLatch</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span>  <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">inc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        t<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> InterruptedException <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i <span class="token operator">++</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                <span class="token annotation punctuation">@Override</span>
+                <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token number">10000</span><span class="token punctuation">;</span> j <span class="token operator">++</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                        <span class="token function">inc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+                    latch<span class="token punctuation">.</span><span class="token function">countDown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        latch<span class="token punctuation">.</span><span class="token function">await</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+</code></pre>
 <ol start="2">
 <li><p>volatile， synchronized， 和显示锁Lock均能保证可见性。</p>
 </li>
@@ -163,6 +207,7 @@
 </ol>
 ]]></content>
       <categories>
+        <category>Java</category>
         <category>并发编程</category>
       </categories>
       <tags>
@@ -171,45 +216,41 @@
       </tags>
   </entry>
   <entry>
-    <title>死锁分析和诊断</title>
-    <url>/2020/10/07/%E6%AD%BB%E9%94%81%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<h3 id="程序死锁"><a href="#程序死锁" class="headerlink" title="程序死锁"></a>程序死锁</h3><ul>
-<li><p>交叉锁导致程序出现死锁，互相等待对方释放锁</p>
-</li>
-<li><p>内存不足</p>
-</li>
-<li><p>一问一答的数据交换</p>
-</li>
-<li><p>数据库锁</p>
-<p>某个线程执行for update语句退出了事务， 其他线程访问数据库时都将陷入死锁</p>
-</li>
-<li><p>文件锁</p>
-</li>
-<li><p>死循环引起的死锁</p>
-<p>程序不工作， CPU占有率居高不下， 一般为系统假死。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>并发编程</category>
-      </categories>
-      <tags>
-        <tag>锁</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Synchronized关键字总结</title>
-    <url>/2020/10/07/Synchronized%20%E5%85%B3%E9%94%AE%E5%AD%97%E6%80%BB%E7%BB%93/</url>
+    <url>/2020/10/07/synchronized-guan-jian-zi-zong-jie/</url>
     <content><![CDATA[<h3 id="什么是synchronized"><a href="#什么是synchronized" class="headerlink" title="什么是synchronized"></a>什么是synchronized</h3><p>synchronized 关键字可以实现一个简单的策略来防止线程干扰和内存一致性错误，如果一个对象对多个线程是可见的，那么对对象对所有读和写都将通过同步对方式来进行。</p>
 <p>提供了一种锁对机制，能够确保共享变量对互斥访问，从而防止数据不一致的问题</p>
 <p>包括monitor enter和monitor exit两个JVM指令， 能够保证在任何时候任何线程执行到monitor enter成功前都必须从主存中获取数据，而不是从缓存中， 在monitor exit运行成功后，共享变量被更新后的值必须刷入到主内存当中</p>
 <p>严格遵守happens-before规则， 一个monitor exit指令之前必须要有一个monitor enter指令</p>
 <h3 id="synchronized-的使用"><a href="#synchronized-的使用" class="headerlink" title="synchronized 的使用"></a>synchronized 的使用</h3><p>1 同步方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sync</span><span class="params">()</span></span>&#123;</span><br><span class="line">   System.out.println(<span class="string">&quot;synchronized method&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre class=" language-java"><code class="language-java">
+<span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">sync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+   System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"synchronized method"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
 <p>2 同步代码块</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mutex</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object MUTEX = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">access</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (MUTEX)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                TimeUnit.MINUTES.sleep(<span class="number">10</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Mutex mutex = <span class="keyword">new</span> Mutex();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(mutex::access).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Mutex</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
 
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> Object MUTEX <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">access</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>MUTEX<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                TimeUnit<span class="token punctuation">.</span>MINUTES<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">final</span> Mutex mutex <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Mutex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span>mutex<span class="token operator">:</span><span class="token operator">:</span>access<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+</code></pre>
 <h3 id="线程堆栈分析"><a href="#线程堆栈分析" class="headerlink" title="线程堆栈分析"></a>线程堆栈分析</h3><p>使用Jconsole工具连接，监控JVM线程</p>
 <p>使用jstack命令打印进程的线程堆栈信息</p>
 <h3 id="synchronized-的底层原理"><a href="#synchronized-的底层原理" class="headerlink" title="synchronized 的底层原理"></a>synchronized 的底层原理</h3><p>使用javap命令对java类进行反汇编， 输出大量JVM命令，在这些命令中，你会发现monitor enter和monitor exit是成对出现的。</p>
@@ -228,12 +269,18 @@
 </li>
 </ol>
 <h3 id="需要注意的问题"><a href="#需要注意的问题" class="headerlink" title="需要注意的问题"></a>需要注意的问题</h3><p>1 与monitor关联的对象不能为null</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Object mutex = <span class="keyword">null</span>;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">synchronized</span> (mutex)&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">final</span> Object mutex <span class="token operator">=</span> null<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>mutex<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
 <p>2 作用域太大， 其效率越低</p>
 <p>3 不同的monitor企图锁相同的方法</p>
 <p>4 多个锁交叉导致死锁</p>
 ]]></content>
       <categories>
+        <category>Java</category>
         <category>并发编程</category>
       </categories>
       <tags>
@@ -242,52 +289,8 @@
       </tags>
   </entry>
   <entry>
-    <title>HashSet 分析</title>
-    <url>/2020/09/24/HashSet/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>集合</category>
-      </categories>
-      <tags>
-        <tag>Set</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HashMap分析</title>
-    <url>/2020/09/24/HashMap/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>集合</category>
-      </categories>
-      <tags>
-        <tag>Map</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vetctor使用和分析</title>
-    <url>/2020/09/23/Vector%E4%BD%BF%E7%94%A8%E5%92%8C%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>集合</category>
-      </categories>
-      <tags>
-        <tag>List</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LinkedList 使用和分析</title>
-    <url>/2020/09/23/LinkedList%E4%BD%BF%E7%94%A8%E5%92%8C%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>集合</category>
-      </categories>
-      <tags>
-        <tag>List</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ArrayList使用和分析</title>
-    <url>/2020/09/21/ArrayList%E4%BD%BF%E7%94%A8%E5%92%8C%E5%88%86%E6%9E%90/</url>
+    <url>/2020/09/21/arraylist-shi-yong-he-fen-xi/</url>
     <content><![CDATA[<h3 id="ArrayList的框架"><a href="#ArrayList的框架" class="headerlink" title="ArrayList的框架"></a>ArrayList的框架</h3><ul>
 <li><p>继承AbstractList抽象类（ AbstractList -&gt; AbstractCollection -&gt; Collection）</p>
 </li>
@@ -301,8 +304,14 @@
 </li>
 </ul>
 <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>ArrayList 相当于一个动态数组，容量动态增长。初识容量0，第一次扩容的大小为10，每次扩容后的大小是之前的1.5倍。在实际的操作中，它不是线程安全的容器，因此在多线程中应该选择Vector或者CopyOnWriteArrayList。</p>
-<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 默认构造函数</span></span><br><span class="line">ArrayList()</span><br><span class="line"></span><br><span class="line"><span class="comment">// capacity是ArrayList的默认容量大小。当由于增加数据导致容量不足时，容量会添加上一次容量大小的一半。</span></span><br><span class="line">ArrayList(<span class="keyword">int</span> capacity)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个包含collection的ArrayList</span></span><br><span class="line">ArrayList(Collection&lt;? extends E&gt; collection)</span><br></pre></td></tr></table></figure>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><pre class=" language-Java"><code class="language-Java">// 默认构造函数
+ArrayList()
 
+// capacity是ArrayList的默认容量大小。当由于增加数据导致容量不足时，容量会添加上一次容量大小的一半。
+ArrayList(int capacity)
+
+// 创建一个包含collection的ArrayList
+ArrayList(Collection<? extends E> collection)</code></pre>
 <h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><ol>
 <li><p>迭代器</p>
 </li>
@@ -313,9 +322,19 @@
 </ol>
 <p>** 效率由高到低 **  索引 》 for循环 = 迭代器</p>
 <h3 id="toArray"><a href="#toArray" class="headerlink" title="toArray"></a>toArray</h3><p><strong>Java不支持向下转型</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;String&gt; stringList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">stringList.add(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">stringList.add(<span class="string">&quot;b&quot;</span>);</span><br><span class="line">stringList.add(<span class="string">&quot;c&quot;</span>);</span><br><span class="line">stringList.add(<span class="string">&quot;d&quot;</span>);</span><br><span class="line">String[] array = stringList.toArray(<span class="keyword">new</span> String[<span class="number">0</span>]);</span><br><span class="line">String[] array2= <span class="keyword">new</span> String[stringList.size()];</span><br><span class="line">stringList.toArray(array2);</span><br><span class="line">System.out.println(array.length);</span><br><span class="line">System.out.println(array2.length);</span><br></pre></td></tr></table></figure>
+<pre class=" language-java"><code class="language-java">List<span class="token operator">&lt;</span>String<span class="token operator">></span> stringList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+stringList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+stringList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"b"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+stringList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"c"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+stringList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"d"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+String<span class="token punctuation">[</span><span class="token punctuation">]</span> array <span class="token operator">=</span> stringList<span class="token punctuation">.</span><span class="token function">toArray</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+String<span class="token punctuation">[</span><span class="token punctuation">]</span> array2<span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span>stringList<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+stringList<span class="token punctuation">.</span><span class="token function">toArray</span><span class="token punctuation">(</span>array2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>array<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>array2<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 ]]></content>
       <categories>
+        <category>Java</category>
         <category>集合</category>
       </categories>
       <tags>
