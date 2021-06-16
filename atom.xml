@@ -6,10 +6,35 @@
   <link href="https://yq05.cn/atom.xml" rel="self"/>
   
   <link href="https://yq05.cn/"/>
-  <updated>2021-05-16T08:35:04.564Z</updated>
+  <updated>2021-06-16T01:42:41.384Z</updated>
   <id>https://yq05.cn/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>泛型</title>
+    <link href="https://yq05.cn/2021/06/14/fan-xing/"/>
+    <id>https://yq05.cn/2021/06/14/fan-xing/</id>
+    <published>2021-06-14T14:27:42.000Z</published>
+    <updated>2021-06-16T01:42:41.384Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;一-泛型是什么&quot;&gt;&lt;a href=&quot;#一-泛型是什么&quot; class=&quot;headerlink&quot; title=&quot;一. 泛型是什么&quot;&gt;&lt;/a&gt;一.</summary>
+        
+      
+    
+    
+    
+    <category term="Java" scheme="https://yq05.cn/categories/Java/"/>
+    
+    
+    <category term="基础语法" scheme="https://yq05.cn/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>动态代理</title>
@@ -101,7 +126,7 @@
     <link href="https://yq05.cn/2020/09/21/arraylist-shi-yong-he-fen-xi/"/>
     <id>https://yq05.cn/2020/09/21/arraylist-shi-yong-he-fen-xi/</id>
     <published>2020-09-21T15:32:54.636Z</published>
-    <updated>2021-05-16T08:35:33.152Z</updated>
+    <updated>2021-06-16T01:35:05.739Z</updated>
     
     
       
@@ -116,8 +141,6 @@
     
     
     <category term="Java" scheme="https://yq05.cn/categories/Java/"/>
-    
-    <category term="集合" scheme="https://yq05.cn/categories/Java/%E9%9B%86%E5%90%88/"/>
     
     
     <category term="List" scheme="https://yq05.cn/tags/List/"/>

@@ -1,6 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>泛型</title>
+    <url>/2021/06/14/fan-xing/</url>
+    <content><![CDATA[<h3 id="一-泛型是什么"><a href="#一-泛型是什么" class="headerlink" title="一. 泛型是什么"></a>一. 泛型是什么</h3><p>泛型是Java1.5引进的，通用的类型，将类型当中参数传递给类，接口或者方法中。</p>
+<h3 id="二-定义和使用"><a href="#二-定义和使用" class="headerlink" title="二. 定义和使用"></a>二. 定义和使用</h3><h4 id="2-1-泛型类"><a href="#2-1-泛型类" class="headerlink" title="2.1 泛型类"></a>2.1 泛型类</h4><pre class=" language-Java"><code class="language-Java">public class Test &lt;E, T&gt; &#123;
+
+  private E val1;
+  private T val2
+
+  public E getE()&#123;
+    return val1;
+  &#125;
+
+  public T getT()&#123;
+    return val2;
+  &#125;
+
+&#125;</code></pre>
+<h4 id="2-2-泛型方法"><a href="#2-2-泛型方法" class="headerlink" title="2.2 泛型方法"></a>2.2 泛型方法</h4><pre class=" language-Java"><code class="language-Java">public class Test &#123;
+
+  public &lt;T&gt; void testMethod(T t)&#123;
+
+  &#125;
+&#125;</code></pre>
+<p>&lt;T&gt; 表示类型参数，而方法中的T表示参数化类型，它不是运行时真正的参数</p>
+<p><strong>泛型类与泛型方法的共存现象</strong></p>
+<pre class=" language-Java"><code class="language-Java">public class Test&lt;T&gt; &#123;
+
+  public void testMethod(T t)&#123;
+
+  &#125;
+
+  public &lt;T&gt; T getVal(T t)&#123;
+    return t;
+  &#125;
+&#125;</code></pre>
+<p><strong>泛型类中类型参数与泛型方法中的类型参数是没有对应的联系，泛型方法始终以自己定义的泛型参数为准</strong></p>
+<h4 id="2-3-泛型接口"><a href="#2-3-泛型接口" class="headerlink" title="2.3 泛型接口"></a>2.3 泛型接口</h4><p>与泛型类类似</p>
+<pre class=" language-Java"><code class="language-Java">public interface Test&lt;T&gt; &#123;
+
+  public &lt;T&gt; void testMethod(T t)&#123;
+
+  &#125;
+&#125;</code></pre>
+<h3 id="三-通配符"><a href="#三-通配符" class="headerlink" title="三. 通配符"></a>三. 通配符</h3><p>形如 &lt;?&gt;<br>背景: <strong>参数类型之间如果有某种继承关系，但不代表泛型有继承关系</strong><br>目的:为了解决泛型中的范围问题。<br>形式：</p>
+<ol>
+<li>&lt;?&gt; 无限定的通配符<br>无法删减和增加元素，只有读取的功能， 涉及的操作基本与类型无关。</li>
+<li>&lt;? extends T&gt; 上限通配符<br>接收T及T的子类， 但仍然不能写操作。</li>
+<li>&lt;? super T&gt; 下限通配符<br>接收T及T的超类， 拥有一定程度的写能力。</li>
+</ol>
+<p><strong>泛型方法取代通配符，执行写操作，要强制转换</strong><br><strong>注意</strong><br>类型参数之间的依赖关系</p>
+<pre class=" language-Java"><code class="language-Java">public class Test2&lt;T,E extends T&gt; &#123;
+    T value1;
+    E value2;
+&#125;</code></pre>
+<h3 id="四-类型擦除"><a href="#四-类型擦除" class="headerlink" title="四. 类型擦除"></a>四. 类型擦除</h3><p><strong>泛型信息只存在与编译阶段，在进入JVM之前，与泛型相关的信息都将被擦除，专业术语是类型擦除。</strong></p>
+<pre class=" language-Java"><code class="language-Java">public static void main(String[] args) &#123;
+  List&lt;String&gt; l1 = new ArrayList&lt;String&gt;();
+  List&lt;Integer&gt; l2 = new ArrayList&lt;Integer&gt;();
+  System.out.println(l1.getClass() == l2.getClass());
+&#125;</code></pre>
+<p>打印:true<br><strong>泛型被擦除后，如果泛型类中的类型参数部分没有指定上限， 则转译成Object类型，如果指定了上限，则替换为类型上限。</strong><br>利用类型擦除，遇到类型不匹配，可以利用反射，绕开这个限制。</p>
+<pre class=" language-Java"><code class="language-Java">public interface List&lt;E&gt; extends Collection&lt;E&gt;&#123;
+
+     boolean add(E e);
+&#125;</code></pre>
+<p>因为E代表任意类型，当类型擦除时，add方法等同于boolean add(Object obj)。</p>
+<pre class=" language-Java"><code class="language-Java">public static void main(String[] args) &#123;
+        List&lt;Integer&gt; ls = new ArrayList&lt;&gt;();
+        ls.add(23);
+        try &#123;
+            Method method = ls.getClass().getDeclaredMethod("add",Object.class);
+            method.invoke(ls,"test");
+            method.invoke(ls,42.9f);
+        &#125; catch (NoSuchMethodException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125; catch (SecurityException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125; catch (IllegalAccessException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125; catch (IllegalArgumentException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125; catch (InvocationTargetException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+
+        for ( Object o: ls)&#123;
+            System.out.println(o);
+        &#125;
+
+    &#125;</code></pre>
+<h3 id="五-使用注意"><a href="#五-使用注意" class="headerlink" title="五. 使用注意"></a>五. 使用注意</h3><ol>
+<li>泛型类和泛型方法中，不接受八种基本数据类型。</li>
+<li>不能创建泛型数组，原因还是类型擦除的影响。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>基础语法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>动态代理</title>
     <url>/2020/10/09/dong-tai-dai-li/</url>
     <content><![CDATA[<h3 id="JDK动态代理"><a href="#JDK动态代理" class="headerlink" title="JDK动态代理"></a>JDK动态代理</h3><p>spring aop 默认使用的是JDK动态代理。如果一个类实现了一个接口，则spring则会用这种方式进行代理。<br>首先是实现InvocationHandler接口， 重写invoke方法， 这个方法就是代理的方法。其次是Proxy类，通过这个类的newProxyInstance方法， 返回一个代理对象。生成的代理对象实现原来那个类的所有接口， 并对接口的方法进行代理 ， 通过代理对象调用这些方法，底层通过反射实现， 调用我们实现的invoke方法。</p>
@@ -335,7 +443,6 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 ]]></content>
       <categories>
         <category>Java</category>
-        <category>集合</category>
       </categories>
       <tags>
         <tag>List</tag>

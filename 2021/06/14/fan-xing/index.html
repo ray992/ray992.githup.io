@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Synchronized关键字总结, 叶强的博客">
+    <meta name="keywords" content="泛型, 叶强的博客">
     <meta name="description" content="工作记录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -27,7 +27,7 @@
 </script>
 
 
-    <title>Synchronized关键字总结 | 叶强的博客</title>
+    <title>泛型 | 叶强的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -327,7 +327,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Synchronized关键字总结</h1>
+                    <h1 class="description center-align post-title">泛型</h1>
                 </div>
             </div>
         </div>
@@ -443,12 +443,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/JVM/">
-                                <span class="chip bg-color">JVM</span>
-                            </a>
-                        
-                            <a href="/tags/%E9%94%81/">
-                                <span class="chip bg-color">锁</span>
+                            <a href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+                                <span class="chip bg-color">基础语法</span>
                             </a>
                         
                     </div>
@@ -463,10 +459,6 @@
                                 Java
                             </a>
                         
-                            <a href="/categories/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
-                                并发编程
-                            </a>
-                        
                     </div>
                     
                 </div>
@@ -476,28 +468,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-07
+                    2021-06-14
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-05-16
+                    2021-06-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    707
+                    782
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    3 分
                 </div>
                 
 
@@ -517,66 +509,103 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="什么是synchronized"><a href="#什么是synchronized" class="headerlink" title="什么是synchronized"></a>什么是synchronized</h3><p>synchronized 关键字可以实现一个简单的策略来防止线程干扰和内存一致性错误，如果一个对象对多个线程是可见的，那么对对象对所有读和写都将通过同步对方式来进行。</p>
-<p>提供了一种锁对机制，能够确保共享变量对互斥访问，从而防止数据不一致的问题</p>
-<p>包括monitor enter和monitor exit两个JVM指令， 能够保证在任何时候任何线程执行到monitor enter成功前都必须从主存中获取数据，而不是从缓存中， 在monitor exit运行成功后，共享变量被更新后的值必须刷入到主内存当中</p>
-<p>严格遵守happens-before规则， 一个monitor exit指令之前必须要有一个monitor enter指令</p>
-<h3 id="synchronized-的使用"><a href="#synchronized-的使用" class="headerlink" title="synchronized 的使用"></a>synchronized 的使用</h3><p>1 同步方法</p>
-<pre class=" language-java"><code class="language-java">
-<span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">sync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-   System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"synchronized method"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
-<p>2 同步代码块</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Mutex</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                <h3 id="一-泛型是什么"><a href="#一-泛型是什么" class="headerlink" title="一. 泛型是什么"></a>一. 泛型是什么</h3><p>泛型是Java1.5引进的，通用的类型，将类型当中参数传递给类，接口或者方法中。</p>
+<h3 id="二-定义和使用"><a href="#二-定义和使用" class="headerlink" title="二. 定义和使用"></a>二. 定义和使用</h3><h4 id="2-1-泛型类"><a href="#2-1-泛型类" class="headerlink" title="2.1 泛型类"></a>2.1 泛型类</h4><pre class=" language-Java"><code class="language-Java">public class Test &lt;E, T&gt; &#123;
 
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> Object MUTEX <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  private E val1;
+  private T val2
 
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">access</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>MUTEX<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                TimeUnit<span class="token punctuation">.</span>MINUTES<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  public E getE()&#123;
+    return val1;
+  &#125;
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">final</span> Mutex mutex <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Mutex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span>mutex<span class="token operator">:</span><span class="token operator">:</span>access<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  public T getT()&#123;
+    return val2;
+  &#125;
 
-</code></pre>
-<h3 id="线程堆栈分析"><a href="#线程堆栈分析" class="headerlink" title="线程堆栈分析"></a>线程堆栈分析</h3><p>使用Jconsole工具连接，监控JVM线程</p>
-<p>使用jstack命令打印进程的线程堆栈信息</p>
-<h3 id="synchronized-的底层原理"><a href="#synchronized-的底层原理" class="headerlink" title="synchronized 的底层原理"></a>synchronized 的底层原理</h3><p>使用javap命令对java类进行反汇编， 输出大量JVM命令，在这些命令中，你会发现monitor enter和monitor exit是成对出现的。</p>
+&#125;</code></pre>
+<h4 id="2-2-泛型方法"><a href="#2-2-泛型方法" class="headerlink" title="2.2 泛型方法"></a>2.2 泛型方法</h4><pre class=" language-Java"><code class="language-Java">public class Test &#123;
+
+  public &lt;T&gt; void testMethod(T t)&#123;
+
+  &#125;
+&#125;</code></pre>
+<p>&lt;T&gt; 表示类型参数，而方法中的T表示参数化类型，它不是运行时真正的参数</p>
+<p><strong>泛型类与泛型方法的共存现象</strong></p>
+<pre class=" language-Java"><code class="language-Java">public class Test&lt;T&gt; &#123;
+
+  public void testMethod(T t)&#123;
+
+  &#125;
+
+  public &lt;T&gt; T getVal(T t)&#123;
+    return t;
+  &#125;
+&#125;</code></pre>
+<p><strong>泛型类中类型参数与泛型方法中的类型参数是没有对应的联系，泛型方法始终以自己定义的泛型参数为准</strong></p>
+<h4 id="2-3-泛型接口"><a href="#2-3-泛型接口" class="headerlink" title="2.3 泛型接口"></a>2.3 泛型接口</h4><p>与泛型类类似</p>
+<pre class=" language-Java"><code class="language-Java">public interface Test&lt;T&gt; &#123;
+
+  public &lt;T&gt; void testMethod(T t)&#123;
+
+  &#125;
+&#125;</code></pre>
+<h3 id="三-通配符"><a href="#三-通配符" class="headerlink" title="三. 通配符"></a>三. 通配符</h3><p>形如 &lt;?&gt;<br>背景: <strong>参数类型之间如果有某种继承关系，但不代表泛型有继承关系</strong><br>目的:为了解决泛型中的范围问题。<br>形式：</p>
 <ol>
-<li><p>monitor enter</p>
-<p>每一个对象都与一个monitor关联， 一个monitor的锁只能被一个线程在同一时间获得。所以如果monitor的计数器为0，则意味着monitor的lock还没有被获得，某个线程获得之后会立即对该计数器加一，这个时候该线程就是该monitor的所有者。如果一个已经拥有该monitor的所有权的线程重如，则会导致计数器再次累加。如果monitor已经被其他线程所拥有， 则其他线程尝试获取该monitor的所有权，会被陷入阻塞状态直到monitor计数器变为0，才能再次尝试获取对monitor对所有权。</p>
-</li>
-<li><p>monitor exit</p>
-<p>释放对monitor对所有权， 将计数器减一。</p>
-</li>
-<li><p>this monitor</p>
-<p>如果一个类中多个方法都被syncronized修饰，争抢的是同一个monitor的lock。</p>
-</li>
-<li><p>class monitor</p>
-<p>如果一个类多个静态方法都被syncronized修饰，同样也是争抢的同一个monitor的lock。</p>
-</li>
+<li>&lt;?&gt; 无限定的通配符<br>无法删减和增加元素，只有读取的功能， 涉及的操作基本与类型无关。</li>
+<li>&lt;? extends T&gt; 上限通配符<br>接收T及T的子类， 但仍然不能写操作。</li>
+<li>&lt;? super T&gt; 下限通配符<br>接收T及T的超类， 拥有一定程度的写能力。</li>
 </ol>
-<h3 id="需要注意的问题"><a href="#需要注意的问题" class="headerlink" title="需要注意的问题"></a>需要注意的问题</h3><p>1 与monitor关联的对象不能为null</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">final</span> Object mutex <span class="token operator">=</span> null<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>mutex<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
-<p>2 作用域太大， 其效率越低</p>
-<p>3 不同的monitor企图锁相同的方法</p>
-<p>4 多个锁交叉导致死锁</p>
+<p><strong>泛型方法取代通配符，执行写操作，要强制转换</strong><br><strong>注意</strong><br>类型参数之间的依赖关系</p>
+<pre class=" language-Java"><code class="language-Java">public class Test2&lt;T,E extends T&gt; &#123;
+    T value1;
+    E value2;
+&#125;</code></pre>
+<h3 id="四-类型擦除"><a href="#四-类型擦除" class="headerlink" title="四. 类型擦除"></a>四. 类型擦除</h3><p><strong>泛型信息只存在与编译阶段，在进入JVM之前，与泛型相关的信息都将被擦除，专业术语是类型擦除。</strong></p>
+<pre class=" language-Java"><code class="language-Java">public static void main(String[] args) &#123;
+  List&lt;String&gt; l1 = new ArrayList&lt;String&gt;();
+  List&lt;Integer&gt; l2 = new ArrayList&lt;Integer&gt;();
+  System.out.println(l1.getClass() == l2.getClass());
+&#125;</code></pre>
+<p>打印:true<br><strong>泛型被擦除后，如果泛型类中的类型参数部分没有指定上限， 则转译成Object类型，如果指定了上限，则替换为类型上限。</strong><br>利用类型擦除，遇到类型不匹配，可以利用反射，绕开这个限制。</p>
+<pre class=" language-Java"><code class="language-Java">public interface List&lt;E&gt; extends Collection&lt;E&gt;&#123;
+
+     boolean add(E e);
+&#125;</code></pre>
+<p>因为E代表任意类型，当类型擦除时，add方法等同于boolean add(Object obj)。</p>
+<pre class=" language-Java"><code class="language-Java">public static void main(String[] args) &#123;
+        List&lt;Integer&gt; ls = new ArrayList&lt;&gt;();
+        ls.add(23);
+        try &#123;
+            Method method = ls.getClass().getDeclaredMethod("add",Object.class);
+            method.invoke(ls,"test");
+            method.invoke(ls,42.9f);
+        &#125; catch (NoSuchMethodException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125; catch (SecurityException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125; catch (IllegalAccessException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125; catch (IllegalArgumentException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125; catch (InvocationTargetException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+
+        for ( Object o: ls)&#123;
+            System.out.println(o);
+        &#125;
+
+    &#125;</code></pre>
+<h3 id="五-使用注意"><a href="#五-使用注意" class="headerlink" title="五. 使用注意"></a>五. 使用注意</h3><ol>
+<li>泛型类和泛型方法中，不接受八种基本数据类型。</li>
+<li>不能创建泛型数组，原因还是类型擦除的影响。</li>
+</ol>
 
                 
             </div>
@@ -603,7 +632,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://yq05.cn/2020/10/07/synchronized-guan-jian-zi-zong-jie/">https://yq05.cn/2020/10/07/synchronized-guan-jian-zi-zong-jie/</a>
+                    <a href="https://yq05.cn/2021/06/14/fan-xing/">https://yq05.cn/2021/06/14/fan-xing/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -641,12 +670,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/JVM/">
-                                    <span class="chip bg-color">JVM</span>
-                                </a>
-                            
-                                <a href="/tags/%E9%94%81/">
-                                    <span class="chip bg-color">锁</span>
+                                <a href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+                                    <span class="chip bg-color">基础语法</span>
                                 </a>
                             
                         </div>
@@ -1079,17 +1104,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/10/08/shen-ru-li-jie-volatile-guan-jian-zi/">
+                <a href="/2021/06/14/fan-xing/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="深入理解volatile关键字">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="泛型">
                         
-                        <span class="card-title">深入理解volatile关键字</span>
+                        <span class="card-title">泛型</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1099,9 +1125,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1110,23 +1136,16 @@
                                     Java
                                 </a>
                             
-                            <a href="/categories/Java/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="post-category">
-                                    并发编程
-                                </a>
-                            
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%86%85%E5%AD%98/">
-                        <span class="chip bg-color">内存</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%B9%B6%E5%8F%91/">
-                        <span class="chip bg-color">并发</span>
+                    <a href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+                        <span class="chip bg-color">基础语法</span>
                     </a>
                     
                 </div>
@@ -1140,13 +1159,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/09/21/arraylist-shi-yong-he-fen-xi/">
+                <a href="/2020/10/09/dong-tai-dai-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="ArrayList使用和分析">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="动态代理">
                         
-                        <span class="card-title">ArrayList使用和分析</span>
+                        <span class="card-title">动态代理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1157,7 +1176,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-09
                             </span>
                         <span class="publish-author">
                             
@@ -1174,8 +1193,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/List/">
-                        <span class="chip bg-color">List</span>
+                    <a href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">代理模式</span>
+                    </a>
+                    
+                    <a href="/tags/spring/">
+                        <span class="chip bg-color">spring</span>
                     </a>
                     
                 </div>
